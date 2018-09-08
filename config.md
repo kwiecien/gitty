@@ -14,3 +14,14 @@ nothing to commit, working tree clean
 ```
 git config --global core.editor "atom --wait"
 ```
+
+# Basic configuration
+```
+# makes sure that Git output is colored
+git config --global color.ui auto
+
+# displays the original state in a conflict
+git config --global merge.conflictstyle diff3
+
+git config --list
+```
