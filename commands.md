@@ -55,3 +55,29 @@ git log master..feature
  git log --no-merges
  git log --merges
  ```
+
+# git tag
+```
+git tag -a v1.0
+```
+The -a flag is used. This flag tells Git to create an annotated flag. If you don't provide the flag (i.e. git tag v1.0) then it'll create what's called a lightweight tag.
+
+Annotated tags are recommended because they include a lot of extra information such as:
+ * the person who made the tag
+ * the date the tag was made
+ * a message for the tag
+
+Because of this, you should always use annotated tags.
+
+It will display all tags that are in the repository:
+```
+git tag
+```
+A Git tag can be deleted:
+```
+git tag -d v1.0
+```
+Running git `tag -a v1.0` will tag the most recent commit. If you wanted to tag a commit that occurred farther back in the repo's history, you have to do is provide the SHA of the commit you want to tag:
+```
+git tag -a v1.0 SHA
+```
