@@ -133,6 +133,9 @@ The main difference between the `^` and the `~` is when a commit is created from
 *   1a56a81 Merge branch 'sidebar'
 ```
 
+-  `^` indicates the **parent** commit
+-  `~` indicates the **first parent** commit
+
 Let's look at how we'd refer to some of the previous commits. Since HEAD points to the 9ec05ca commit:
 
 -   HEAD^ is the db7e87a commit
@@ -142,3 +145,24 @@ Let's look at how we'd refer to some of the previous commits. Since HEAD points 
 -   HEAD^^^ is the 0c5975a commit
 -   HEAD~3 is also the 0c5975a commit
 -   HEAD^^^2 is the 4c9749e commit (this is the grandparent's (HEAD^^) second parent (^2))
+
+# git reset
+
+Reverting creates a new commit that reverts or undos a previous commit. Resetting, on the other hand, **erases** commits!
+
+    git reset <reference-to-commit>
+
+`git reset` can be used to:
+
+-   move the HEAD and current branch pointer to the referenced commit
+-   erase commits
+-   move committed changes to the staging index
+-   unstage committed changes
+
+##### Git Reset's Flags
+
+The way that Git determines if it erases, stages previously committed changes, or unstages previously committed changes is by the flag that's used. The flags are:
+
+-   `--mixed` running `git reset --mixed HEAD^` will take the changes made in the last commit and move them to the **working directory**
+-   \--soft  running `git reset --soft HEAD^` will take the changes made in the last commit and move them to the **Staging Index**
+-   \--hard running `git reset --hard HEAD^` will take the changes made in the last commit and **erases** them
