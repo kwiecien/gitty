@@ -22,3 +22,7 @@
     git config --global merge.conflictstyle diff3
 
     git config --list
+
+# New line characters
+
+    git config --global core.autocrlf true
