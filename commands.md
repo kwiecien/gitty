@@ -10,6 +10,10 @@ git log --patch == git log -p  == git show
 git log --oneline --graph --decorate
 ```
 
+All branches:
+
+    git log --oneline --graph --decorate --all
+
 ## [Filtering the Commit History](https://www.atlassian.com/git/tutorials/git-log)
 
 -   By Amount
@@ -97,3 +101,13 @@ A Git tag can be deleted:
 Running git `tag -a v1.0` will tag the most recent commit. If you wanted to tag a commit that occurred farther back in the repo's history, you have to do is provide the SHA of the commit you want to tag:
 
     git tag -a v1.0 SHA
+
+# git branch
+
+Adding a branch to the specific commit:
+
+    git branch feature sha1sha
+
+Create a new branch and have this branch start at the same location as the master branch:
+
+    git checkout -b feature master
