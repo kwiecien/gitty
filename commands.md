@@ -205,4 +205,36 @@ The way that Git determines if it erases, stages previously committed changes, o
 
 -  Comparing staging area with repository
 
-        gir diff --staged
+        git diff --staged
+
+# git reflog
+
+Reflog is a mechanism to record when the tip of branches are updated. It is **the safety net**.
+
+Reflog allows you to go back to commits even though they are not referenced by any branch or tag. After rewriting history, the reflog contains information about the old state of branches and allows you to go back to that state if necessary.
+
+##### [Example](https://www.atlassian.com/git/tutorials/rewriting-history)
+What if we want to operate on one of the squashed commits? Maybe to remove its changes from history? This is an opportunity to leverage the reflog.
+
+```bash
+git reflog
+37656e1 HEAD@{0}: rebase -i (finish): returning to refs/heads/git_reflog
+37656e1 HEAD@{1}: rebase -i (start): checkout origin/master
+37656e1 HEAD@{2}: commit: some WIP changes
+```
+
+We can see there are reflog entries for the start and finish of the rebase and prior to those is our "some WIP changes" commit. We can pass the reflog ref to git reset and reset to a commit that was before the rebase.
+
+    git reset HEAD@{2}
+
+##### [Example](https://www.atlassian.com/git/tutorials/rewriting-history)
+```bash
+0a2e358 HEAD@{0}: reset: moving to HEAD~2
+0254ea7 HEAD@{1}: checkout: moving from 2.2 to master
+c10f740 HEAD@{2}: checkout: moving from master to 2.2
+```
+The reflog above shows a checkout from master to the 2.2 branch and back. From there, there's a hard reset to an older commit. The latest activity is represented at the top labeled `HEAD@{0}`.
+
+If it turns out that you accidentally moved back, the reflog will contain the commit master pointed to (0254ea7) before you accidentally dropped 2 commits.
+
+    git reset --hard 0254ea7
