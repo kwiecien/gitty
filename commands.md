@@ -117,3 +117,28 @@ Create a new branch and have this branch start at the same location as the maste
 The command undo the changes that were made by the provided commit. It also provides a commit message of the commit that was reverted. Furthermore, it creates a new commit to record this change.
 
     git revert shaOfCommitToRevert
+
+# Relative commits
+
+The main difference between the `^` and the `~` is when a commit is created from a merge. A merge commit has two parents. With a merge commit, the `^` reference is used to indicate the first parent of the commit while `^2` indicates the second parent. The first parent is the branch you were on when you ran `git merge` while the second parent is the branch that was merged in.
+
+```bash
+* 9ec05ca (HEAD -> master) Revert "Set page heading to "Quests & Crusades""
+* db7e87a Set page heading to "Quests & Crusades"
+*   796ddb0 Merge branch 'heading-update'
+|\
+| * 4c9749e (heading-update) Set page heading to "Crusade"
+* | 0c5975a Set page heading to "Quest"
+|/
+*   1a56a81 Merge branch 'sidebar'
+```
+
+Let's look at how we'd refer to some of the previous commits. Since HEAD points to the 9ec05ca commit:
+
+-   HEAD^ is the db7e87a commit
+-   HEAD~1 is also the db7e87a commit
+-   HEAD^^ is the 796ddb0 commit
+-   HEAD~2 is also the 796ddb0 commit
+-   HEAD^^^ is the 0c5975a commit
+-   HEAD~3 is also the 0c5975a commit
+-   HEAD^^^2 is the 4c9749e commit (this is the grandparent's (HEAD^^) second parent (^2))
