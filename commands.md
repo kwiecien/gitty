@@ -111,3 +111,9 @@ Adding a branch to the specific commit:
 Create a new branch and have this branch start at the same location as the master branch:
 
     git checkout -b feature master
+
+# git revert
+
+The command undo the changes that were made by the provided commit. It also provides a commit message of the commit that was reverted. Furthermore, it creates a new commit to record this change.
+
+    git revert shaOfCommitToRevert
