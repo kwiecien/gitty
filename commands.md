@@ -3,9 +3,7 @@
 ```bash
 git log --oneline
 git log --stat
-git log --patch == git log -p  == git show
 ```
-
 ```bash
 git log --oneline --graph --decorate
 ```
@@ -13,6 +11,12 @@ git log --oneline --graph --decorate
 All branches:
 
     git log --oneline --graph --decorate --all
+
+Show changes introduced in the parent commit:
+
+    git log --patch
+    git log -p
+    git show
 
 ## [Filtering the Commit History](https://www.atlassian.com/git/tutorials/git-log)
 
@@ -133,8 +137,8 @@ The main difference between the `^` and the `~` is when a commit is created from
 *   1a56a81 Merge branch 'sidebar'
 ```
 
--  `^` indicates the **parent** commit
--  `~` indicates the **first parent** commit
+-   `^` indicates the **parent** commit
+-   `~` indicates the **first parent** commit
 
 Let's look at how we'd refer to some of the previous commits. Since HEAD points to the 9ec05ca commit:
 
@@ -166,3 +170,39 @@ The way that Git determines if it erases, stages previously committed changes, o
 -   `--mixed` running `git reset --mixed HEAD^` will take the changes made in the last commit and move them to the **working directory**
 -   \--soft  running `git reset --soft HEAD^` will take the changes made in the last commit and move them to the **Staging Index**
 -   \--hard running `git reset --hard HEAD^` will take the changes made in the last commit and **erases** them
+
+# git diff
+
+-   By default git diff will show you any uncommitted changes since the last commit
+
+         git diff
+
+-   Comparing files between two different commits
+
+         git diff sha1 sha2
+
+-   Comparing two branches
+
+    ```bash
+    # the diff input is the tips of both branches
+    git diff branch1..other-feature-branch
+    git diff branch1 other-feature-branch
+
+    # the three dot operator
+    git diff branch1...other-feature-branch
+    ```
+
+    The three dot operator initiates the diff by changing the first input parameter `branch1`. It **changes `branch1` into a ref of the _shared common ancestor commit_ between the two diff inputs**, the shared ancestor of branch1 and other-feature-branch. The last parameter input parameter remains unchanged as the tip of other-feature-branch.
+
+-   Comparing files from two branches
+
+         git diff master new_branch ./diff_test.txt
+
+-  Comparing working directory with staging area
+
+        git diff
+
+
+-  Comparing staging area with repository
+
+        gir diff --staged
